@@ -19,7 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       },
       (results) => {
-        console.log('anus');
         const container = document.getElementById('project');
         if (results && results[0]) {
           const rawInfo = results[0].result;
@@ -37,15 +36,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
           const data = formattedInfo.join('');
           if(data.length > 0){
-             console.log('bbanus');
             container.innerHTML = data;
           } else{
-            console.log('bbbanus');
             container.innerHTML = '<p><span>Geen project geselecteerd</span></p>';    
           }
-          console.log('banus');
-        } else{
-          console.log('canus');
         }
       }
     );
