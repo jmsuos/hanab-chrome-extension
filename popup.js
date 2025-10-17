@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
       },
       (results) => {
         const container = document.getElementById('project');
+        container.innerHTML = '<p><span>Geen project geselecteerd</span></p>';
         if (results && results[0]) {
           const rawInfo = results[0].result;
 
