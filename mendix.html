@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <title>Hanab Dashboard</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700"  />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="layout/css/style.css" />
+</head>
+<body>
+
+  <h1 style="margin-bottom:2rem; color:#222;">Hanab Dashboard</h1>
+
+  <div class="dashboard">
+    <div class="card" id="panelCard">
+      <div class="card-header">
+        <h2 id="panelTitle">Hanab</h2>
+        <span class="icon"><i class="fas fa-tachometer-alt"></i></span>
+      </div>
+      <div class="card-content">
+        <span id="panelInfo">Laden...</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <h2>Huidig project</h2>
+        <span class="icon"><i class="fas fa-chart-line"></i></span>
+      </div>
+      <div class="card-content" id="project">
+        <p>Geen project geselecteerd</p>
+      </div>
+      <script src="popup.js"></script>
+    </div>
+
+  </div>
+
+  <footer>
+    &copy; J.M. Suos - 2025 Hanab.
+  </footer>
+
+  <script src="mendix.js"></script>
+</body>
+</html>

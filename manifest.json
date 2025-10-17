@@ -1,0 +1,35 @@
+{
+  "manifest_version": 3,
+  "name": "Hanab",
+  "version": "1.0",
+  "description": "Dynamische zijpaneel-extensie met directe klik en live update",
+  "background": {
+    "service_worker": "background.js"
+  },
+  "host_permissions": [
+    "https://vwtworkflow.mendixcloud.com/*"
+  ],
+  "action": {
+    "default_title": "Click to open panel",
+    "default_popup": "mendix.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://vwtworkflow.mendixcloud.com/*"], 
+      "css": ["layout/css/style.css"],
+       "js": ["content.js"]
+    }
+  ],
+  "permissions": ["sidePanel", "tabs", "scripting"],
+  "commands": {
+    "_execute_action": {
+      "suggested_key": {
+        "default": "Ctrl+B",
+        "mac": "Command+B"
+      }
+    }
+  },
+  "icons": {
+    "128": "icons/icon128.png"
+  }
+}
