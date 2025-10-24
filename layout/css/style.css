@@ -140,3 +140,113 @@ footer {
 .tab-pane input[type="submit"]:hover {
     background-color: #0052a3;
 }
+
+/* Dropzone Styles */
+.dropzone {
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: #f9f9f9;
+}
+
+.dropzone:hover {
+    border-color: #0066cc;
+    background-color: #f0f7ff;
+}
+
+.dropzone.dragover {
+    border-color: #0066cc;
+    background-color: #e3f2fd;
+    border-style: solid;
+}
+
+.dropzone i {
+    font-size: 3rem;
+    color: #0066cc;
+    margin-bottom: 1rem;
+}
+
+.dropzone p {
+    margin: 0.5rem 0;
+    color: #666;
+}
+
+.dropzone-hint {
+    font-size: 0.85rem;
+    color: #999;
+}
+
+#sheetSelector {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+}
+
+#sheetSelector label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+#sheetSelect {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#processSheet {
+    width: 100%;
+    padding: 0.6rem 1rem;
+    background-color: #0066cc;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#processSheet:hover {
+    background-color: #0052a3;
+}
+
+#excelData {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+#dataPreview {
+    font-size: 0.9rem;
+}
+
+#dataPreview table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0.5rem;
+}
+
+#dataPreview th,
+#dataPreview td {
+    border: 1px solid #ddd;
+    padding: 0.5rem;
+    text-align: left;
+}
+
+#dataPreview th {
+    background-color: #0066cc;
+    color: white;
+    font-weight: 600;
+}
+
+#dataPreview tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
