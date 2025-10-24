@@ -213,8 +213,9 @@
 
       const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
       this.selectedSheetData = jsonData;
-      
-      this.displayData(jsonData, sheetName);
+
+      console.log(filterDataByElementAndRegelnr(jsonData));
+      this.displayData(filterDataByElementAndRegelnr(jsonData), sheetName);
     }
 
     /**
@@ -230,8 +231,10 @@
         return;
       }
 
-      const maxPreviewRows = 10;
-      let html = `<h5>Tabblad: ${sheetName}</h5><table>`;
+      // Get the maximum column count from header row
+      const columnCount = data[0] ? data[0].length : 0;
+
+      let html = `<h5>Tabblad: ${this.escapeHtml(sheetName)}</h5><table>`;
 
       // Header row
       if (data[0]) {
@@ -243,19 +246,25 @@
       }
 
       // Data rows
+      const maxPreviewRows = 10;
       const rowsToShow = Math.min(data.length, maxPreviewRows + 1);
+      
       for (let i = 1; i < rowsToShow; i++) {
         html += '<tr>';
-        data[i].forEach(cell => {
+        
+        // Ensure each row has the same number of columns as the header
+        for (let j = 0; j < columnCount; j++) {
+          const cell = data[i][j];
           html += `<td>${this.escapeHtml(cell || '')}</td>`;
-        });
+        }
+        
         html += '</tr>';
       }
 
       // Show remaining rows count
       if (data.length > maxPreviewRows + 1) {
         const remaining = data.length - maxPreviewRows - 1;
-        html += `<tr><td colspan="${data[0].length}"><em>... en ${remaining} meer rijen</em></td></tr>`;
+        html += `<tr><td colspan="${columnCount}"><em>... en ${remaining} meer rijen</em></td></tr>`;
       }
 
       html += '</table>';
@@ -265,7 +274,7 @@
         this.elements.excelDataDiv.style.display = 'block';
       }
 
-      console.log('[ExcelHandler] Excel data loaded:', this.selectedSheetData.length, 'rows');
+      console.log('[Hanab Excel] Data preview displayed');
     }
 
     /**
@@ -330,3 +339,53 @@
     window.excelHandler = new ExcelHandler();
   }
 })();
+
+/**
+ * Filters Excel data to include only rows with Element, Regelnr, and Basishoeveelheid > 0
+ * @param {Array} data - 2D array from Excel (first row is headers)
+ * @returns {Array} Filtered data including header row
+ */
+function filterDataByElementAndRegelnr(data) {
+  if (!data || data.length < 2) {
+    return data; // Return as-is if no data or only headers
+  }
+
+  // Get header indices (assuming first row is headers)
+  const headers = data[0];
+  const elementIndex = 0;     // First column: Element
+  const regelnrIndex = 2;     // Third column: Regelnr
+  const basisIndex = 3;       // Fourth column: Basishoeveelheid
+
+  // Start with header row
+  const filtered = [headers];
+
+  // Process data rows (skip header at index 0)
+  for (let i = 1; i < data.length; i++) {
+    const row = data[i];
+
+    const element = row[elementIndex];
+    const regelnr = row[regelnrIndex];
+    const basishoeveelheid = row[basisIndex];
+
+    // Check if Element and Regelnr exist (not empty/null/undefined)
+    const hasElement = element !== undefined && element !== null && element !== '';
+    const hasRegelnr = regelnr !== undefined && regelnr !== null && regelnr !== '';
+
+    // Parse Basishoeveelheid as number
+    let basisValue = 0;
+    if (basishoeveelheid !== undefined && basishoeveelheid !== null) {
+      // Try to convert to number, will be NaN if alphabetical
+      basisValue = parseFloat(basishoeveelheid);
+    }
+
+    // Include row if:
+    // 1. Has Element
+    // 2. Has Regelnr
+    // 3. Basishoeveelheid is a valid number > 0
+    if (hasElement && hasRegelnr && !isNaN(basisValue) && basisValue > 0) {
+      filtered.push(row);
+    }
+  }
+
+  return filtered;
+}

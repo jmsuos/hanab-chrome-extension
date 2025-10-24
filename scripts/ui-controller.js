@@ -54,6 +54,8 @@
                     return;
                 }
 
+                console.log('ui-controller', tab);
+
                 this.currentTab = tab;
 
                 const panelTitle = document.getElementById(CONFIG.SELECTORS.PANEL_TITLE);
@@ -61,9 +63,13 @@
                 const panelCard = document.getElementById(CONFIG.SELECTORS.PANEL_CARD);
 
                 if (panelTitle && panelInfo && panelCard) {
+
+                    const url = new URL(tab.url);
+                    const hostname = url.hostname;
+
                     panelCard.style.background = '#e0f7fa';
-                    panelTitle.textContent = 'Hanab – VWT Workflow';
-                    panelInfo.innerHTML = `Je bevindt je op URL: <span class="highlight">${tab.url}</span>`;
+                    panelTitle.textContent = `${hostname}`;
+                    panelInfo.innerHTML = `Je bevindt je op URL: <span class="highlight">${hostname}</span>`;
                 }
             } catch (error) {
                 console.error('[Hanab] Error updating panel:', error);

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Hanab Dashboard</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+          integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="layout/css/style.css"/>
+</head>
+<body>
+
+<h1 style="margin-bottom:2rem; color:#222;">Hanab Dashboard</h1>
+
+<div class="dashboard">
+    <div class="card" id="panelCard">
+        <div class="card-header">
+            <h2 id="panelTitle">Hanab</h2>
+            <span class="icon"><i class="fas fa-tachometer-alt"></i></span>
+        </div>
+        <div class="card-content">
+            <span id="panelInfo">Laden...</span>
+        </div>
+    </div>
+
+
+    <div class="card">
+        <div class="card-header">
+            <h2>Excel Import</h2>
+            <span class="icon"><i class="fas fa-upload"></i></span>
+        </div>
+        <div class="card-content" id="calculatie">
+            <div id="dropzone" class="dropzone">
+                <i class="fas fa-file-excel"></i>
+                <p>Sleep een Excel bestand hierheen</p>
+                <p class="dropzone-hint">of klik om te selecteren</p>
+                <input type="file" id="fileInput" accept=".xls,.xlsx" style="display: none;" />
+            </div>
+            <div id="sheetSelector" style="display: none;">
+                <label for="sheetSelect">Selecteer tabblad:</label>
+                <select id="sheetSelect"></select>
+                <button id="processSheet">Verwerken</button>
+            </div>
+            <div id="excelData" style="display: none;">
+                <h4>Excel gegevens:</h4>
+                <div id="dataPreview"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    &copy; J.M. Suos - 2025 Hanab.
+</footer>
+
+<!-- Scripts: Order matters! -->
+<script src="scripts/xlsx.full.min.js"></script>
+<script src="scripts/excel-handler.js"></script>
+<script src="scripts/ui-controller.js"></script>
+</body>
+</html>
