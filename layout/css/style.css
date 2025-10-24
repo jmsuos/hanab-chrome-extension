@@ -74,3 +74,69 @@ footer {
   color: #999;
   font-size: 0.9rem;
 }
+
+/* Tab System Styles */
+.tab-navigation {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.tab-button {
+    padding: 0.5rem 1rem;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: #666;
+    transition: all 0.3s ease;
+    margin-bottom: -2px;
+}
+
+.tab-button:hover {
+    color: #222;
+    background-color: #f5f5f5;
+}
+
+.tab-button.active {
+    color: #0066cc;
+    border-bottom-color: #0066cc;
+    font-weight: 600;
+}
+
+.tab-content {
+    padding-top: 1rem;
+}
+
+.tab-pane {
+    display: none;
+}
+
+.tab-pane.active {
+    display: block;
+}
+
+.tab-pane span {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.tab-pane button,
+.tab-pane input[type="submit"] {
+    width: 100%;
+    padding: 0.6rem 1rem;
+    background-color: #0066cc;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+}
+
+.tab-pane button:hover,
+.tab-pane input[type="submit"]:hover {
+    background-color: #0052a3;
+}
