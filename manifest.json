@@ -7,17 +7,13 @@
     "service_worker": "background.js"
   },
   "host_permissions": [
-    "https://vwtworkflow.mendixcloud.com/*"
+    "https://vwtworkflow.mendixcloud.com/*",
+    "https://mijn.wowportaal.nl/*"
   ],
-  "action": {
-    "default_title": "Click to open panel",
-    "default_popup": "mendix.html"
-  },
   "content_scripts": [
     {
       "matches": ["https://vwtworkflow.mendixcloud.com/*"], 
-      "css": ["layout/css/style.css"],
-       "js": ["content.js"]
+      "js": ["content.js"]
     }
   ],
   "permissions": ["sidePanel", "tabs", "scripting"],
