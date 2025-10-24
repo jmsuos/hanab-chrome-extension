@@ -14,9 +14,6 @@
   "action": {
     "default_title": "Open Hanab Side Panel"
   },
-  "side_panel": {
-    "default_path": "workflow.html"
-  },
   "content_scripts": [
     {
       "matches": ["https://vwtworkflow.mendixcloud.com/*"],
