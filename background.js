@@ -10,41 +10,81 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * Background Service Worker for Hanab Extension
+ * Manages side panel behavior based on active URL
+ */
 
-const MENDIX_ORIGIN = 'vwtworkflow.mendixcloud.com';
-const WOW_ORIGIN = 'mijn.wowportaal.nl';
+const CONFIG = {
+  ORIGINS: {
+    MENDIX: 'vwtworkflow.mendixcloud.com',
+    WOW: 'mijn.wowportaal.nl'
+  },
+  PAGES: {
+    MENDIX: 'mendix.html',
+    WOW: 'wow.html'
+  }
+};
 
-// Allows users to open the side panel by clicking on the action toolbar icon
+/**
+ * Enable side panel to open on action click
+ */
 chrome.sidePanel
   .setPanelBehavior({ openPanelOnActionClick: true })
-  .catch((error) => console.error(error));
+  .catch((error) => console.error('[Hanab] Error setting panel behavior:', error));
 
-
-
-chrome.tabs.onUpdated.addListener(async (tabId, info, tab) => {
+/**
+ * Handle tab updates to show/hide appropriate side panel
+ */
+chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
+  // Only process when URL is available
   if (!tab.url) return;
-  const url = new URL(tab.url);
-  const hostname = url.hostname;
-  console.log(hostname);
-  // Enables the side panel on google.com
-  if (hostname === MENDIX_ORIGIN) {
-    await chrome.sidePanel.setOptions({
-      tabId,
-      path: 'mendix.html',
-      enabled: true
-    });
-  } else if(hostname === WOW_ORIGIN) { 
-    await chrome.sidePanel.setOptions({
-      tabId,
-      path: 'wow.html',
-      enabled: true
-    });
-  } else {
-    // Disables the side panel on all other sites
-    await chrome.sidePanel.setOptions({
-      tabId,
-      enabled: false
-    });
+
+  try {
+    const url = new URL(tab.url);
+    const hostname = url.hostname;
+
+    console.log('[Hanab] Tab updated:', hostname);
+
+    // Determine which side panel to show
+    let panelPath = null;
+    
+    if (hostname === CONFIG.ORIGINS.MENDIX) {
+      panelPath = CONFIG.PAGES.MENDIX;
+    } else if (hostname === CONFIG.ORIGINS.WOW) {
+      panelPath = CONFIG.PAGES.WOW;
+    }
+
+    // Set side panel options
+    if (panelPath) {
+      await chrome.sidePanel.setOptions({
+        tabId,
+        path: panelPath,
+        enabled: true
+      });
+      console.log(`[Hanab] Side panel enabled: ${panelPath}`);
+    } else {
+      // Disable side panel on other sites
+      await chrome.sidePanel.setOptions({
+        tabId,
+        enabled: false
+      });
+      console.log('[Hanab] Side panel disabled');
+    }
+  } catch (error) {
+    console.error('[Hanab] Error handling tab update:', error);
+  }
+});
+
+/**
+ * Handle extension installation
+ */
+chrome.runtime.onInstalled.addListener((details) => {
+  console.log('[Hanab] Extension installed:', details.reason);
+  
+  if (details.reason === 'install') {
+    console.log('[Hanab] First time installation');
+  } else if (details.reason === 'update') {
+    console.log('[Hanab] Extension updated from', details.previousVersion);
   }
 });

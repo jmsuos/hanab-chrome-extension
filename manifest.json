@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Hanab",
-  "version": "1.0",
-  "description": "Dynamische zijpaneel-extensie met directe klik en live update",
+  "version": "1.1.0",
+  "description": "Hanab Chrome Extension for enhancing Mendix and WOW.",
   "background": {
     "service_worker": "background.js"
   },
@@ -10,9 +10,15 @@
     "https://vwtworkflow.mendixcloud.com/*",
     "https://mijn.wowportaal.nl/*"
   ],
+  "action": {
+    "default_title": "Open Hanab Side Panel"
+  },
+  "side_panel": {
+    "default_path": "mendix.html"
+  },
   "content_scripts": [
     {
-      "matches": ["https://vwtworkflow.mendixcloud.com/*"], 
+      "matches": ["https://vwtworkflow.mendixcloud.com/*"],
       "js": ["content.js"]
     }
   ],

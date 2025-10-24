@@ -5,119 +5,9 @@
     <title>Hanab Dashboard</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-          integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer"/>
+          integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="stylesheet" href="layout/css/style.css"/>
-    <style>
-/* Dropzone Styles */
-.dropzone {
-  border: 2px dashed #ccc;
-  border-radius: 8px;
-  padding: 2rem;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  background-color: #f9f9f9;
-}
-
-.dropzone:hover {
-  border-color: #0066cc;
-  background-color: #f0f7ff;
-}
-
-.dropzone.dragover {
-  border-color: #0066cc;
-  background-color: #e3f2fd;
-  border-style: solid;
-}
-
-.dropzone i {
-  font-size: 3rem;
-  color: #0066cc;
-  margin-bottom: 1rem;
-}
-
-.dropzone p {
-  margin: 0.5rem 0;
-  color: #666;
-}
-
-.dropzone-hint {
-  font-size: 0.85rem;
-  color: #999;
-}
-
-#sheetSelector {
-  margin-top: 1rem;
-  padding: 1rem;
-  background-color: #f5f5f5;
-  border-radius: 4px;
-}
-
-#sheetSelector label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: 600;
-}
-
-#sheetSelect {
-  width: 100%;
-  padding: 0.5rem;
-  margin-bottom: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-#processSheet {
-  width: 100%;
-  padding: 0.6rem 1rem;
-  background-color: #0066cc;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-#processSheet:hover {
-  background-color: #0052a3;
-}
-
-#excelData {
-  margin-top: 1rem;
-  padding: 1rem;
-  background-color: #f9f9f9;
-  border-radius: 4px;
-  max-height: 300px;
-  overflow-y: auto;
-}
-
-#dataPreview {
-  font-size: 0.9rem;
-}
-
-#dataPreview table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 0.5rem;
-}
-
-#dataPreview th,
-#dataPreview td {
-  border: 1px solid #ddd;
-  padding: 0.5rem;
-  text-align: left;
-}
-
-#dataPreview th {
-  background-color: #0066cc;
-  color: white;
-  font-weight: 600;
-}
-
-#dataPreview tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-    </style>
 </head>
 <body>
 
@@ -147,19 +37,19 @@
     <div class="card">
         <div class="card-header">
             <h2>Tools</h2>
-            <span class="icon"><i class="fas fa-chart-line"></i></span>
+            <span class="icon"><i class="fas fa-wrench"></i></span>
         </div>
         <div class="card-content" id="tools">
             <!-- Tab Navigation -->
             <div class="tab-navigation">
-                <button class="tab-button" data-tab="documenten">Documenten</button>
+                <button class="tab-button active" data-tab="documenten">Documenten</button>
                 <button class="tab-button" data-tab="V&G">V&G</button>
-                <button class="tab-button active" data-tab="vergunningen">Vergunningen</button>
+                <button class="tab-button" data-tab="vergunningen">Vergunningen</button>
             </div>
 
             <!-- Tab Content -->
             <div class="tab-content">
-                <div class="tab-pane" id="documenten">
+                <div class="tab-pane active" id="documenten">
                     <span><button id="selectAllDocuments">Selecteer alle documenten</button></span>
                 </div>
                 <div class="tab-pane" id="V&G">
@@ -167,8 +57,8 @@
                     <span><button id="setAllYes">JA</button></span>
                     <span><button id="setAllNo">NEE</button></span>
                 </div>
-                <div class="tab-pane active" id="vergunningen">
-                    V e r g u n n i n g e n
+                <div class="tab-pane" id="vergunningen">
+                    <p>Vergunningen tools komen hier</p>
                 </div>
             </div>
         </div>
@@ -176,7 +66,7 @@
 
     <div class="card">
         <div class="card-header">
-            <h2>Dropzone</h2>
+            <h2>Excel Import</h2>
             <span class="icon"><i class="fas fa-upload"></i></span>
         </div>
         <div class="card-content" id="calculatie">
@@ -203,9 +93,9 @@
     &copy; J.M. Suos - 2025 Hanab.
 </footer>
 
-<script src="popup.js"></script>
-<script src="excelHandler.js"></script>
-<script src="mendix.js"></script>
+<!-- Scripts: Order matters! -->
 <script src="xlsx.full.min.js"></script>
+<script src="excelHandler.js"></script>
+<script src="ui-controller.js"></script>
 </body>
 </html>
